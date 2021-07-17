@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no minimal-ui"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache,no-store, must-revalidate">
+        <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+        <meta HTTP-EQUIV="expires" CONTENT="0">
+        <title>Webview页面标题</title>
+        <style type="text/css">
+        </style>
+        
+        <script type="text/javascript">
+            function call(text) {
+                var message = {
+                    'method' : 'hello',
+                    'params' : {
+                        'name':'张三',
+                        'age':28
+                    },
+                    'callback': 'callback'
+                };
+                window.webkit.messageHandlers.webViewApp.postMessage(message);
+                alert("JS调用OC");
+
+            }
+        
+            function callback(text) {
+                document.getElementById("result").innerText=text;
+                
+                alert("回调成功！");
+                return "JS已经获得Objective-C的返回值";
+            }
+        
+            function callJs(text) {
+                document.getElementById("result").innerText="Objective-C调用了JS："+text;
+                return "你好";
+            }
+        
+        function pop() {
+            var message = {
+                'method' : 'tobackpage'
+            };
+            window.webkit.messageHandlers.B.postMessage(message);
+        }
+        
+        function CallBack(url) {
+            var message = {
+                'method' : '🐂🍺',
+                
+            };
+            window.webkit.messageHandlers.A.postMessage(message);
+        }
+        function Clean() {
+            var message = {
+                'method' : 'clean',
+                
+            };
+            window.webkit.messageHandlers.C.postMessage(message);
+        }
+        </script>
+    </head>
+    <body>
+        Hello，World！<br />
+        <span id="result">
+            
+        </span><br />
+        <button onclick="call('Hello World!')">JS调OC</button><br /><br /><br />
+        <button onclick="pop()">去微博</button><br /><br /><br />
+         <button onclick="CallBack('http://www.baidu.com/')">🐂🍺</button><br /><br /><br />
+         <button onclick="Clean('')">清除缓存</button><br /><br /><br />
+
+    </body>
+</html>
